@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "checkJs": true,
+    "moduleResolution": "node",
+    "target": "es2019"
+  }
+}
