@@ -20,55 +20,9 @@ const sleep = async ms => new Promise(res => setTimeout(res, ms))
  * Layout
  * @param {*} opts
  */
-const menu = opts => {
-  // term.bold("Usage\n");
-
-  // term.brightBlack(" 🏃 Press").white(" r ").brightBlack("to run file\n");
-  // term
-  //   .brightBlack(" 📦 Press")
-  //   .white(" s ")
-  //   .brightBlack("Toggle npm install no save option: ")
-  //   .white(`npm install${opts.npmInstallNoSave ? " --no-save" : ""}\n`);
-  // if (opts.npmInstallNoSave) {
-  //   term
-  //     .red(
-  //       "    ⚠️  with --no-save you can import only one package at time not included in package.json\n"
-  //     )
-  //     .brightBlack("       More https://github.com/npm/cli/issues/1460\n");
-  // }
-  // term.brightBlack(" 🚪 Press").white(" CTRL + C ").brightBlack("to exit\n\n");
-  return opts
-}
-
-/**
- * Layout
- * @param {*} opts
- */
 const header = opts => {
   term.moveTo(1, 1)
   term.brightBlack('🚀 Are you ready for launch? \n\n')
-  return opts
-}
-
-/**
- *
- * @param {*} baseDirPath
- * @param {*} currentFilePath
- * @param {*} isFile
- */
-const currentFile = (baseDirPath, currentFilePath, isFile) => (
-  opts = { running: false, path: undefined }
-) => {
-  // term(isFile ? 'Running file: ' : 'Watching directory: ').bold(
-  //   `${currentFilePath.replace(`${baseDirPath}/`, '')}\n\n`
-  // )
-
-  if (isFile === false && opts.path) {
-    term("Executed '").bold(opts.path.replace(`${baseDirPath}/`, ''))(
-      "' file.\n\n"
-    )
-  }
-
   return opts
 }
 
@@ -114,31 +68,17 @@ const main = async options => {
     term.clear()
     switch (true) {
       case state.current === types.RUNNING:
-        const isFile = statSync(state.running.file).isFile()
-        const runningScreen = compose(
-          // currentFile(options.baseDir, state.running.file, isFile),
-          // menu,
-          header,
-          tap(term.clear)
-        )
+        const runningScreen = compose(header, tap(term.clear))
         runningScreen(state)
         runner(runningScreen, state.running.file)
         return
 
       case state.current === types.CHOOSE_FILE:
-        compose(
-          chooseFile,
-          // header,
-          term.clear
-        )()
+        compose(chooseFile, term.clear)()
         return
 
       default:
-        compose(
-          // menu,
-          // header,
-          term.clear
-        )()
+        compose(term.clear)()
     }
   }
 
@@ -147,7 +87,6 @@ const main = async options => {
     const notChoosingFile = store.getState().current !== types.CHOOSE_FILE
     if (['r', 'R'].includes(key) && notChoosingFile) {
       actions.choseFileOperation()
-      // guard({})
     }
 
     if (['s', 'S'].includes(key) && notChoosingFile) {
@@ -156,12 +95,11 @@ const main = async options => {
 
     // Detect CTRL-C and exit 'manually'
     if (key === 'CTRL_C') {
-      term.green('\n😅 Bye bye\n')
+      term.green('\n💛\n')
       process.exit()
     }
   })
 
-  // term.grabInput(true);
   store.watch(loop)
 }
 
