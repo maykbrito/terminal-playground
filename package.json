@@ -1,5 +1,5 @@
 {
-  "name": "mod-terminal-playground",
+  "name": "terminal-playground",
   "version": "0.1.7",
   "description": "Transpile Javascript and Typescript on the fly - by David Nussio",
   "main": "src/index.js",
