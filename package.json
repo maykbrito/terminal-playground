@@ -1,12 +1,16 @@
 {
   "name": "terminal-playground",
   "version": "0.1.7",
-  "description": "Transpile Javascript and Typescript on the fly - by David Nussio",
+  "description": "Transpile Javascript and Typescript on the fly by davidnussio",
   "main": "src/index.js",
   "bin": "bin/terminal-playground.js",
   "scripts": {
     "build": "node internals/build.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maykbrito/terminal-playground.git"
   },
   "keywords": [
     "javascript",
@@ -14,7 +18,12 @@
     "esbuild",
     "playground"
   ],
+  "author": "David Nussio",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/maykbrito/terminal-playground/issues"
+  },
+  "homepage": "https://github.com/maykbrito/terminal-playground#readme",
   "dependencies": {
     "chokidar": "^3.5.1",
     "crocks": "0.12.4",
